@@ -1,0 +1,20 @@
+.post-add-container {
+  max-width: 600px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.post-add-card {
+  background: #ffffff;
+  border: 1px solid #e8e8e8;
+}
+
+.post-add-form {
+  margin-top: 24px;
+}
+
+.submit-button {
+  background: #1677ff;
+  border-color: #1677ff;
+  width: 100%;
+}

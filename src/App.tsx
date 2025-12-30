@@ -1,24 +1,64 @@
+import { BrowserRouter, Routes, Route, Link, useLocation } from 'react-router-dom'
+import { Layout, Menu } from 'antd'
+import { HomeOutlined, PlusOutlined, UserAddOutlined } from '@ant-design/icons'
+import PostList from './screens/Post/PostList'
+import PostAdd from './screens/Post/PostAdd'
+import PostDetails from './screens/Post/PostDetails'
+import Registration from './screens/Registration'
+import './App.css'
 
-function App() {
+const { Header, Content } = Layout
+
+function AppContent() {
+  const location = useLocation()
+
+  const menuItems = [
+    {
+      key: '/',
+      icon: <HomeOutlined />,
+      label: <Link to="/">Posts</Link>,
+    },
+    {
+      key: '/add-post',
+      icon: <PlusOutlined />,
+      label: <Link to="/add-post">Add Post</Link>,
+    },
+    {
+      key: '/register',
+      icon: <UserAddOutlined />,
+      label: <Link to="/register">Register</Link>,
+    },
+  ]
 
   return (
-    <p>
-      Welcome to Frontend Evaluation. 
-      Your task is to build a web application that allows users to view a list of posts and add new posts.
-      The application should be built using React, Vite, Ant Design, and Vitest.
-      To get started, please follow the instructions below:
-      - Fork the repository
-      - Install dependencies
-      - Run the development server
-      - Run the tests
-      To Raise PR: 
-      - Create a new branch with your name in the parent repo.
-      - Raise a PR from your fork to the parent repo.
-      - Wait for the pipeline to pass.
-      - Submit your submission.
-    </p>
+    <Layout className="app-layout">
+      <Header className="app-header">
+        <Menu
+          theme="light"
+          mode="horizontal"
+          selectedKeys={[location.pathname]}
+          items={menuItems}
+          className="app-menu"
+        />
+      </Header>
+      <Content className="app-content">
+        <Routes>
+          <Route path="/" element={<PostList />} />
+          <Route path="/posts/:id" element={<PostDetails />} />
+          <Route path="/add-post" element={<PostAdd />} />
+          <Route path="/register" element={<Registration />} />
+        </Routes>
+      </Content>
+    </Layout>
+  )
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <AppContent />
+    </BrowserRouter>
   )
 }
 
 export default App
-
